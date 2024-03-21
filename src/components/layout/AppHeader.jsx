@@ -20,7 +20,7 @@ export default function AppHeader() {
   const { crypto } = useCrypto();
   const [select, setSelect] = useState(false);
   const [coin, setCoin] = useState(null);
-  const [drawer, setDrawer] = useState(null);
+  const [drawer, setDrawer] = useState(false);
   const [modal, setModal] = useState(false);
 
   useEffect(() => {
@@ -48,7 +48,6 @@ export default function AppHeader() {
         onClick={() => setSelect((prev) => !prev)}
         value={"press / to open"}
         style={{ width: "250px" }}
-        defaultValue={["china"]}
         options={crypto.map((coin) => ({
           label: coin.name,
           value: coin.id,
@@ -83,8 +82,13 @@ export default function AppHeader() {
         <CoininfoModal coin={coin} />
       </Modal>
 
-      <Drawer title="Add Asset" onClose={() => setDrawer(false)} open={drawer}>
-        <AddAssetForm />
+      <Drawer
+        destroyOnClose
+        title="Add Asset"
+        onClose={() => setDrawer(false)}
+        open={drawer}
+      >
+        <AddAssetForm onClose={() => setDrawer(false)} />
       </Drawer>
     </Layout.Header>
   );
