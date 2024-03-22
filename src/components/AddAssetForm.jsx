@@ -76,7 +76,7 @@ export default function AddAssetForm({ onClose }) {
     const newAsset = {
       id: coin.id,
       amount: values.amount,
-      price: values.price,
+      price: +values.price,
       date: values.date?.$d ?? new Date(),
     };
 
